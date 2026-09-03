@@ -49,8 +49,19 @@ tabla de respuestas, y por eso las respuestas se ven colgando de su comentario.
 
 ### Tabla `registros`
 
-Quedó de un ejercicio anterior, con las columnas `nombre` y `mensaje`. **La
-página ya no la usa** y está vacía. No la borres sin preguntarme.
+| Columna | Qué guarda | Quién la llena |
+|---|---|---|
+| `nombre` | Texto. Quién escribió. | La persona. Obligatorio. |
+| `mensaje` | Texto. Lo que escribió. | La persona. Obligatorio. |
+| `creado_en` | La fecha y hora en que se guardó. | Se pone sola. |
+| `id` | Un número que distingue cada renglón. | Se pone solo. |
+
+Quedó de un ejercicio anterior. **La página ya no la usa** y está vacía. No la
+borres sin preguntarme.
+
+> Las columnas de las tres tablas están comprobadas contra la base de datos, no
+> copiadas de memoria. La única que puede quedar vacía es `responde_a`; todas las
+> demás son obligatorias.
 
 ### Quién puede hacer qué, en las tres tablas
 
