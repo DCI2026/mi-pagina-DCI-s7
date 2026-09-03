@@ -3,46 +3,101 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Todavía no hay nada aquí</title>
+<title>MI PROYECTO DCI</title>
 <style>
   :root { color-scheme: light dark; }
+  * { box-sizing: border-box; }
+
   body {
-    margin: 0; min-height: 100vh;
-    display: grid; place-items: center;
+    margin: 0;
+    padding: 20px 16px 48px;
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: #f4f6f8; color: #1a2027;
-    padding: 24px;
+    background: #f4f6f8;
+    color: #1a2027;
+    line-height: 1.55;
+    -webkit-text-size-adjust: 100%;
   }
+
+  .hoja { max-width: 620px; margin: 0 auto; }
+
+  header { padding: 22px 0 26px; }
+  h1 {
+    margin: 0 0 10px;
+    /* crece con la pantalla, sin pasarse en celular ni en monitor */
+    font-size: clamp(28px, 7vw, 42px);
+    line-height: 1.15;
+    letter-spacing: -.01em;
+    overflow-wrap: break-word;
+  }
+  .para-que {
+    margin: 0;
+    font-size: clamp(16px, 4vw, 18px);
+    opacity: .78;
+    max-width: 46ch;
+  }
+
+  /* El espacio donde va a ir el formulario. Marcado a proposito para que se
+     note que todavia esta vacio y que no es un error. */
+  .pendiente {
+    border: 2px dashed #b8c2cd;
+    border-radius: 14px;
+    background: #fbfcfd;
+    padding: clamp(28px, 8vw, 44px) 20px;
+    text-align: center;
+  }
+  .etiqueta {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: #e3e9f0;
+    color: #4a5765;
+    margin: 0 0 14px;
+  }
+  .pendiente h2 { margin: 0 0 8px; font-size: clamp(17px, 4.5vw, 20px); }
+  .pendiente p  { margin: 0 auto; max-width: 38ch; font-size: 15px; opacity: .72; }
+
+  footer {
+    margin: 30px 0 0;
+    font-size: 13px;
+    text-align: center;
+    opacity: .55;
+  }
+
   @media (prefers-color-scheme: dark) {
-    body { background: #121820; color: #e8eef5; }
-    .caja { background: #1b232e !important; border-color: #2b3644 !important; }
-    code { background: #253040 !important; }
+    body      { background: #121820; color: #e8eef5; }
+    .pendiente{ background: #1b232e; border-color: #38455670; }
+    .etiqueta { background: #253040; color: #a9bccf; }
   }
-  .caja {
-    background: #fff; border: 1px solid #dde3ea; border-radius: 14px;
-    padding: 34px; max-width: 480px; text-align: center;
-    box-shadow: 0 10px 30px -18px rgba(0,0,0,.3);
-  }
-  h1 { font-size: 22px; margin: 0 0 10px; }
-  p { margin: 0 0 14px; line-height: 1.55; }
-  p:last-child { margin-bottom: 0; }
-  code {
-    background: #eef2f6; padding: 2px 6px; border-radius: 4px;
-    font-family: ui-monospace, "Consolas", monospace; font-size: .9em;
-  }
-  .chica { font-size: 14px; opacity: .75; }
 </style>
 </head>
 <body>
-  <div class="caja">
-    <h1>Todavía no hay nada aquí</h1>
-    <p>Y eso es exactamente lo que tiene que decir hoy.</p>
-    <p>Si estás leyendo esto en tu propia liga, quiere decir que
-       <strong>tu repositorio, tu publicación y tu página ya funcionan</strong>.
-       Es todo lo que necesitabas antes de la sesión.</p>
-    <p class="chica">El martes le vas a pedir a Claude que reemplace esta página
-       por la tuya. Este archivo se llama <code>index.html</code> y es el único
-       que hay que cambiar.</p>
+  <div class="hoja">
+
+    <header>
+      <h1>MI PROYECTO DCI</h1>
+      <p class="para-que">
+        Una página de práctica para aprender a construir con Claude, paso a paso
+        y sin escribir código.
+      </p>
+    </header>
+
+    <main>
+      <section class="pendiente" aria-labelledby="titulo-pendiente">
+        <p class="etiqueta">Siguiente paso</p>
+        <h2 id="titulo-pendiente">Aquí va a ir el formulario</h2>
+        <p>
+          Este espacio está apartado a propósito. Todavía no hay formulario ni
+          datos: eso se agrega después.
+        </p>
+      </section>
+    </main>
+
+    <footer>Sesión 7 · Curso Claude for Business</footer>
+
   </div>
 </body>
 </html>
