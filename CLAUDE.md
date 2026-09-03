@@ -8,8 +8,15 @@ primer minuto.
 
 ## 1. Qué es este proyecto y quién lo usa
 
-*(Lo escribes tú en la sesión: dos líneas. Qué es la página, para quién es y cada
-cuándo se usa.)*
+Es una **página de prueba**: existe para que yo aprenda a usar Claude. No es de
+un cliente, no es para trabajo real y nadie depende de ella. Tiene un formulario
+donde cualquiera escribe su nombre y un mensaje, y abajo una lista con lo que se
+ha guardado.
+
+La uso mientras dure el curso. Como es de práctica, si algo se rompe no pasa
+nada: se puede tirar y volver a empezar. Eso significa que aquí puedes proponerme
+cosas y equivocarte sin drama — lo único que sí me importa es que me digas la
+verdad de qué probaste y qué no.
 
 ## 2. De dónde sale cada cifra
 
@@ -57,8 +64,32 @@ ver la sección 4.
 
 ## 5. Mi regla de verificación
 
-*(La escribes tú en la sesión: con qué frase cierras lo que entregas y qué tiene
-que ser cierto para que puedas publicarlo.)*
+Cuando me entregues algo, cierra con esta frase:
+
+> **Probado, no supuesto.**
+
+Y solo la escribes si de verdad es cierta. Antes de la frase, dime en tres
+renglones:
+
+1. **Qué probaste de verdad** y qué te contestó la prueba. No "debería
+   funcionar": qué corriste y qué salió.
+2. **Qué NO pudiste probar**, y por qué.
+3. **Qué me toca revisar a mí** con mis propios ojos.
+
+Si no probaste algo, no escribas la frase. **Prefiero un "no pude" que un "ya
+quedó".** Si me dices que algo sirve y no sirve, no me sirves de nada; si me
+dices que no sabes, todavía te puedo creer lo demás.
+
+### Antes de publicar (fusionar a `main`), estas tres tienen que ser ciertas:
+
+- **Yo abrí la vista previa y lo vi funcionando con mis propios ojos.** No basta
+  con que tú digas que sirve.
+- **No hay ninguna llave `sb_secret_` ni `service_role` en la carpeta** (sección 4).
+- **Nada de lo que muestra la página está inventado**: o sale de la tabla, o sale
+  de lo que escribió la persona (sección 2).
+
+Si alguna de las tres no se cumple, no se publica — aunque yo tenga prisa y te
+diga que le des. Recuérdamelo.
 
 ## 6. Cómo vuelvo a abrir esto
 
