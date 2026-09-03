@@ -7,29 +7,33 @@
 <style>
   :root {
     color-scheme: light dark;
-    --fondo:       #f4f6f8;
-    --texto:       #1a2027;
-    --tarjeta:     #fbfcfd;
-    --borde:       #dde3ea;
-    --borde-fuerte:#b8c2cd;
-    --suave-fondo: #e3e9f0;
-    --suave-texto: #4a5765;
-    --acento:      #1a2027;
-    --acento-texto:#ffffff;
-    --error:       #b3261e;
+    /* Azules. Los grises tambien traen tinte azul, para que todo se lea
+       como una sola familia y no como gris con azul encima. */
+    --fondo:        #f1f6fc;
+    --texto:        #0f2440;
+    --tarjeta:      #ffffff;
+    --borde:        #d4e0ef;
+    --borde-fuerte: #a7bdd9;
+    --suave-fondo:  #dbe8f8;
+    --suave-texto:  #1d4b80;
+    --acento:       #1d5fbf;
+    --acento-vivo:  #16499a;
+    --acento-texto: #ffffff;
+    --error:        #b3261e;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --fondo:       #121820;
-      --texto:       #e8eef5;
-      --tarjeta:     #1b232e;
-      --borde:       #2b3644;
-      --borde-fuerte:#384556;
-      --suave-fondo: #253040;
-      --suave-texto: #a9bccf;
-      --acento:      #3b7ddd;
-      --acento-texto:#ffffff;
-      --error:       #ff9a92;
+      --fondo:        #0b1626;
+      --texto:        #e4edf8;
+      --tarjeta:      #132339;
+      --borde:        #23374f;
+      --borde-fuerte: #33506f;
+      --suave-fondo:  #1b3350;
+      --suave-texto:  #a8c7ea;
+      --acento:       #4f9bf5;
+      --acento-vivo:  #74b2ff;
+      --acento-texto: #08172b;
+      --error:        #ff9a92;
     }
   }
 
@@ -46,6 +50,21 @@
   }
 
   .hoja { max-width: 620px; margin: 0 auto; }
+
+  /* ---- Barra de arriba con el boton DCI ---- */
+  .barra { display: flex; justify-content: flex-end; padding: 4px 0 0; }
+  .boton-dci {
+    display: inline-block;
+    font-size: 14px; font-weight: 700; letter-spacing: .08em;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    color: var(--acento);
+    background: var(--tarjeta);
+    border: 2px solid var(--acento);
+  }
+  .boton-dci:hover { background: var(--acento); color: var(--acento-texto); }
+  .boton-dci:focus-visible { outline: 2px solid var(--acento-vivo); outline-offset: 3px; }
 
   /* ---- Encabezado: igual que antes ---- */
   header { padding: 22px 0 26px; }
@@ -113,6 +132,7 @@
     background: var(--acento); color: var(--acento-texto);
     cursor: pointer;
   }
+  button.enviar:hover:not(:disabled) { background: var(--acento-vivo); }
   button.enviar:disabled { opacity: .5; cursor: default; }
   .aviso { font-size: 14px; margin: 12px 0 0; min-height: 1.2em; opacity: .8; }
   .aviso.error { color: var(--error); opacity: 1; font-weight: 600; }
@@ -141,7 +161,7 @@
   .respuestas {
     margin: 10px 0 0 0;
     padding: 0 0 0 14px;
-    border-left: 3px solid var(--suave-fondo);
+    border-left: 3px solid var(--acento);
     display: grid;
     gap: 12px;
   }
@@ -173,6 +193,11 @@
 </head>
 <body>
   <div class="hoja">
+
+    <div class="barra">
+      <a class="boton-dci" href="https://dcoloso.com.mx"
+         target="_blank" rel="noopener noreferrer">DCI</a>
+    </div>
 
     <header>
       <h1>MI PROYECTO DCI</h1>
