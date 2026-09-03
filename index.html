@@ -5,72 +5,169 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MI PROYECTO DCI</title>
 <style>
-  :root { color-scheme: light dark; }
+  :root {
+    color-scheme: light dark;
+    --fondo:       #f4f6f8;
+    --texto:       #1a2027;
+    --tarjeta:     #fbfcfd;
+    --borde:       #dde3ea;
+    --borde-fuerte:#b8c2cd;
+    --suave-fondo: #e3e9f0;
+    --suave-texto: #4a5765;
+    --acento:      #1a2027;
+    --acento-texto:#ffffff;
+    --error:       #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fondo:       #121820;
+      --texto:       #e8eef5;
+      --tarjeta:     #1b232e;
+      --borde:       #2b3644;
+      --borde-fuerte:#384556;
+      --suave-fondo: #253040;
+      --suave-texto: #a9bccf;
+      --acento:      #3b7ddd;
+      --acento-texto:#ffffff;
+      --error:       #ff9a92;
+    }
+  }
+
   * { box-sizing: border-box; }
 
   body {
     margin: 0;
     padding: 20px 16px 48px;
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    background: #f4f6f8;
-    color: #1a2027;
+    background: var(--fondo);
+    color: var(--texto);
     line-height: 1.55;
     -webkit-text-size-adjust: 100%;
   }
 
   .hoja { max-width: 620px; margin: 0 auto; }
 
+  /* ---- Encabezado: igual que antes ---- */
   header { padding: 22px 0 26px; }
   h1 {
     margin: 0 0 10px;
-    /* crece con la pantalla, sin pasarse en celular ni en monitor */
     font-size: clamp(28px, 7vw, 42px);
     line-height: 1.15;
     letter-spacing: -.01em;
     overflow-wrap: break-word;
   }
-  .para-que {
-    margin: 0;
-    font-size: clamp(16px, 4vw, 18px);
-    opacity: .78;
-    max-width: 46ch;
-  }
+  .para-que { margin: 0; font-size: clamp(16px, 4vw, 18px); opacity: .78; max-width: 46ch; }
 
-  /* El espacio donde va a ir el formulario. Marcado a proposito para que se
-     note que todavia esta vacio y que no es un error. */
-  .pendiente {
-    border: 2px dashed #b8c2cd;
+  /* ---- Pestanas ---- */
+  .pestanas {
+    display: flex;
+    gap: 6px;
+    border-bottom: 1px solid var(--borde);
+    margin: 0 0 22px;
+  }
+  .pestana {
+    flex: 1 1 0;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    color: inherit;
+    background: none;
+    border: 0;
+    border-bottom: 3px solid transparent;
+    padding: 12px 8px;
+    margin-bottom: -1px;
+    cursor: pointer;
+    opacity: .6;
+  }
+  .pestana[aria-selected="true"] { opacity: 1; border-bottom-color: var(--acento); }
+  .pestana:focus-visible { outline: 2px solid var(--acento); outline-offset: -3px; border-radius: 6px 6px 0 0; }
+
+  /* ---- Formularios ---- */
+  .tarjeta {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
     border-radius: 14px;
-    background: #fbfcfd;
-    padding: clamp(28px, 8vw, 44px) 20px;
-    text-align: center;
+    padding: 20px;
+    margin: 0 0 26px;
   }
-  .etiqueta {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: .09em;
-    text-transform: uppercase;
-    padding: 5px 11px;
-    border-radius: 999px;
-    background: #e3e9f0;
-    color: #4a5765;
+  .tarjeta h2 { margin: 0 0 4px; font-size: 17px; }
+  .pie-campo { margin: 0 0 16px; font-size: 14px; opacity: .7; }
+  label { display: block; font-size: 14px; font-weight: 600; margin: 0 0 6px; }
+  input, textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 16px; /* 16px evita que el celular haga zoom al escribir */
+    padding: 10px 12px;
     margin: 0 0 14px;
+    color: inherit;
+    background: var(--fondo);
+    border: 1px solid var(--borde);
+    border-radius: 9px;
   }
-  .pendiente h2 { margin: 0 0 8px; font-size: clamp(17px, 4.5vw, 20px); }
-  .pendiente p  { margin: 0 auto; max-width: 38ch; font-size: 15px; opacity: .72; }
+  textarea { resize: vertical; min-height: 84px; }
+  input:focus, textarea:focus { outline: 2px solid var(--acento); outline-offset: 1px; }
 
-  footer {
-    margin: 30px 0 0;
-    font-size: 13px;
-    text-align: center;
-    opacity: .55;
+  button.enviar {
+    font: inherit; font-size: 15px; font-weight: 600;
+    padding: 11px 20px; border: 0; border-radius: 9px;
+    background: var(--acento); color: var(--acento-texto);
+    cursor: pointer;
   }
+  button.enviar:disabled { opacity: .5; cursor: default; }
+  .aviso { font-size: 14px; margin: 12px 0 0; min-height: 1.2em; opacity: .8; }
+  .aviso.error { color: var(--error); opacity: 1; font-weight: 600; }
 
-  @media (prefers-color-scheme: dark) {
-    body      { background: #121820; color: #e8eef5; }
-    .pendiente{ background: #1b232e; border-color: #38455670; }
-    .etiqueta { background: #253040; color: #a9bccf; }
+  /* ---- Listas ---- */
+  h3.titulo-lista {
+    margin: 0 0 12px;
+    font-size: 13px; letter-spacing: .08em; text-transform: uppercase; opacity: .6;
+  }
+  .fila {
+    border-top: 1px solid var(--borde);
+    padding: 16px 0 8px;
+  }
+  .fila:first-child { border-top: 0; padding-top: 0; }
+  .quien { font-size: 15px; font-weight: 700; margin: 0 0 3px; overflow-wrap: anywhere; }
+  .dice  { margin: 0 0 6px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .cuando { font-size: 13px; opacity: .55; }
+
+  .responder {
+    font: inherit; font-size: 13px; font-weight: 600;
+    background: none; border: 0; padding: 4px 0; margin: 6px 0 0;
+    color: inherit; opacity: .65; cursor: pointer; text-decoration: underline;
+  }
+  .responder:hover { opacity: 1; }
+
+  .respuestas {
+    margin: 10px 0 0 0;
+    padding: 0 0 0 14px;
+    border-left: 3px solid var(--suave-fondo);
+    display: grid;
+    gap: 12px;
+  }
+  .respuesta .quien { font-size: 14px; }
+  .respuesta .etiqueta-r {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    background: var(--suave-fondo); color: var(--suave-texto);
+    padding: 2px 8px; border-radius: 999px; margin: 0 0 5px;
+  }
+  .caja-respuesta {
+    margin: 12px 0 0;
+    padding: 14px;
+    background: var(--fondo);
+    border: 1px dashed var(--borde-fuerte);
+    border-radius: 11px;
+  }
+  .caja-respuesta input, .caja-respuesta textarea { background: var(--tarjeta); margin-bottom: 10px; }
+  .caja-respuesta textarea { min-height: 64px; }
+
+  .vacio { margin: 0; opacity: .7; font-style: italic; }
+
+  footer { margin: 30px 0 0; font-size: 13px; text-align: center; opacity: .55; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pestana { transition: opacity .15s ease, border-color .15s ease; }
   }
 </style>
 </head>
@@ -85,19 +182,347 @@
       </p>
     </header>
 
+    <nav class="pestanas" role="tablist" aria-label="Secciones">
+      <button class="pestana" role="tab" id="tab-comentarios"
+              aria-controls="panel-comentarios" aria-selected="true">Comentarios</button>
+      <button class="pestana" role="tab" id="tab-propuestas"
+              aria-controls="panel-propuestas" aria-selected="false" tabindex="-1">Propuestas</button>
+    </nav>
+
     <main>
-      <section class="pendiente" aria-labelledby="titulo-pendiente">
-        <p class="etiqueta">Siguiente paso</p>
-        <h2 id="titulo-pendiente">Aquí va a ir el formulario</h2>
-        <p>
-          Este espacio está apartado a propósito. Todavía no hay formulario ni
-          datos: eso se agrega después.
-        </p>
+
+      <section id="panel-comentarios" role="tabpanel" aria-labelledby="tab-comentarios">
+        <form class="tarjeta" id="form-comentario">
+          <h2>Deja un comentario</h2>
+          <p class="pie-campo">Qué te parece el proyecto.</p>
+
+          <label for="c-nombre">Tu nombre</label>
+          <input id="c-nombre" name="nombre" type="text" maxlength="80" required autocomplete="name">
+
+          <label for="c-texto">Tu comentario</label>
+          <textarea id="c-texto" name="comentario" maxlength="1000" required></textarea>
+
+          <button class="enviar" type="submit">Publicar comentario</button>
+          <p class="aviso" id="c-aviso" role="status" aria-live="polite"></p>
+        </form>
+
+        <h3 class="titulo-lista">Comentarios</h3>
+        <div id="lista-comentarios"><p class="vacio">Cargando…</p></div>
       </section>
+
+      <section id="panel-propuestas" role="tabpanel" aria-labelledby="tab-propuestas" hidden>
+        <form class="tarjeta" id="form-propuesta">
+          <h2>Propón algo</h2>
+          <p class="pie-campo">Qué crees que le hace falta a esta página.</p>
+
+          <label for="p-nombre">Tu nombre</label>
+          <input id="p-nombre" name="nombre" type="text" maxlength="80" required autocomplete="name">
+
+          <label for="p-texto">Tu propuesta</label>
+          <textarea id="p-texto" name="propuesta" maxlength="1000" required></textarea>
+
+          <button class="enviar" type="submit">Enviar propuesta</button>
+          <p class="aviso" id="p-aviso" role="status" aria-live="polite"></p>
+        </form>
+
+        <h3 class="titulo-lista">Propuestas recibidas</h3>
+        <div id="lista-propuestas"><p class="vacio">Cargando…</p></div>
+      </section>
+
     </main>
 
     <footer>Sesión 7 · Curso Claude for Business</footer>
 
   </div>
+
+<script>
+  // Los datos viven en Supabase, en las tablas "comentarios" y "propuestas".
+  // Esta llave es publica a proposito: solo permite leer y agregar, nunca borrar.
+  var SUPABASE_URL = "https://vxsstmgblaxfrxwqlzjk.supabase.co";
+  var SUPABASE_KEY = "sb_publishable_3xFqmwJv0_cJgkJrVMmIMg_i4krftqX";
+
+  var REST   = SUPABASE_URL + "/rest/v1/";
+  var LLAVES = { apikey: SUPABASE_KEY, Authorization: "Bearer " + SUPABASE_KEY };
+
+  function leer(tabla, orden) {
+    return fetch(REST + tabla + "?select=*&order=" + orden, { headers: LLAVES })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      });
+  }
+
+  function agregar(tabla, datos) {
+    return fetch(REST + tabla, {
+      method: "POST",
+      headers: Object.assign({}, LLAVES, { "Content-Type": "application/json" }),
+      body: JSON.stringify(datos)
+    }).then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r;
+    });
+  }
+
+  function fecha(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    return d.toLocaleString("es-MX", { dateStyle: "long", timeStyle: "short" });
+  }
+
+  function aviso(el, texto, esError) {
+    el.className = esError ? "aviso error" : "aviso";
+    el.textContent = texto;
+  }
+
+  function mensajeVacio(contenedor, texto) {
+    var p = document.createElement("p");
+    p.className = "vacio";
+    p.textContent = texto;
+    contenedor.replaceChildren(p);
+  }
+
+  // ---------- Pestanas ----------
+  var pestanas = [
+    { boton: document.getElementById("tab-comentarios"), panel: document.getElementById("panel-comentarios") },
+    { boton: document.getElementById("tab-propuestas"),  panel: document.getElementById("panel-propuestas")  }
+  ];
+
+  function abrirPestana(indice) {
+    pestanas.forEach(function (p, i) {
+      var activa = i === indice;
+      p.boton.setAttribute("aria-selected", activa ? "true" : "false");
+      p.boton.tabIndex = activa ? 0 : -1;
+      p.panel.hidden = !activa;
+    });
+  }
+
+  pestanas.forEach(function (p, i) {
+    p.boton.addEventListener("click", function () { abrirPestana(i); });
+    p.boton.addEventListener("keydown", function (ev) {
+      var salto = ev.key === "ArrowRight" ? 1 : ev.key === "ArrowLeft" ? -1 : 0;
+      if (!salto) return;
+      ev.preventDefault();
+      var siguiente = (i + salto + pestanas.length) % pestanas.length;
+      abrirPestana(siguiente);
+      pestanas[siguiente].boton.focus();
+    });
+  });
+
+  // ---------- Comentarios ----------
+  var listaComentarios = document.getElementById("lista-comentarios");
+
+  function dibujaRespuesta(r) {
+    var art = document.createElement("article");
+    art.className = "respuesta";
+
+    var etq = document.createElement("p");
+    etq.className = "etiqueta-r";
+    etq.textContent = "Respuesta";
+
+    var quien = document.createElement("p");
+    quien.className = "quien";
+    quien.textContent = r.nombre;           // textContent: lo que escriban es texto, nunca codigo
+
+    var dice = document.createElement("p");
+    dice.className = "dice";
+    dice.textContent = r.comentario;
+
+    var cuando = document.createElement("time");
+    cuando.className = "cuando";
+    cuando.textContent = fecha(r.creado_en);
+    if (r.creado_en) cuando.dateTime = r.creado_en;
+
+    art.append(etq, quien, dice, cuando);
+    return art;
+  }
+
+  function cajaDeRespuesta(idPadre) {
+    var caja = document.createElement("form");
+    caja.className = "caja-respuesta";
+    caja.hidden = true;
+
+    var nombre = document.createElement("input");
+    nombre.type = "text"; nombre.required = true; nombre.maxLength = 80;
+    nombre.placeholder = "Tu nombre";
+    nombre.setAttribute("aria-label", "Tu nombre");
+
+    var texto = document.createElement("textarea");
+    texto.required = true; texto.maxLength = 1000;
+    texto.placeholder = "Tu respuesta";
+    texto.setAttribute("aria-label", "Tu respuesta");
+
+    var enviar = document.createElement("button");
+    enviar.type = "submit"; enviar.className = "enviar"; enviar.textContent = "Responder";
+
+    var av = document.createElement("p");
+    av.className = "aviso";
+    av.setAttribute("role", "status");
+    av.setAttribute("aria-live", "polite");
+
+    caja.append(nombre, texto, enviar, av);
+
+    caja.addEventListener("submit", function (ev) {
+      ev.preventDefault();
+      var n = nombre.value.trim(), t = texto.value.trim();
+      if (!n || !t) return;
+      enviar.disabled = true;
+      aviso(av, "Enviando…", false);
+      agregar("comentarios", { nombre: n, comentario: t, responde_a: idPadre })
+        .then(function () { return cargarComentarios(); })
+        .catch(function () {
+          aviso(av, "No se pudo enviar la respuesta. Vuelve a intentar.", true);
+          enviar.disabled = false;
+        });
+    });
+
+    return caja;
+  }
+
+  function dibujaComentario(c, respuestas) {
+    var art = document.createElement("article");
+    art.className = "fila";
+
+    var quien = document.createElement("p");
+    quien.className = "quien";
+    quien.textContent = c.nombre;
+
+    var dice = document.createElement("p");
+    dice.className = "dice";
+    dice.textContent = c.comentario;
+
+    var cuando = document.createElement("time");
+    cuando.className = "cuando";
+    cuando.textContent = fecha(c.creado_en);
+    if (c.creado_en) cuando.dateTime = c.creado_en;
+
+    var boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "responder";
+    boton.textContent = "Responder";
+
+    var caja = cajaDeRespuesta(c.id);
+
+    boton.addEventListener("click", function () {
+      caja.hidden = !caja.hidden;
+      boton.textContent = caja.hidden ? "Responder" : "Cancelar";
+      if (!caja.hidden) caja.querySelector("input").focus();
+    });
+
+    art.append(quien, dice, cuando, document.createElement("br"), boton, caja);
+
+    if (respuestas.length) {
+      var cont = document.createElement("div");
+      cont.className = "respuestas";
+      respuestas.forEach(function (r) { cont.append(dibujaRespuesta(r)); });
+      art.append(cont);
+    }
+
+    return art;
+  }
+
+  function cargarComentarios() {
+    return leer("comentarios", "creado_en.asc").then(function (filas) {
+      if (!filas.length) {
+        mensajeVacio(listaComentarios, "Todavía no hay comentarios. Sé la primera persona en escribir.");
+        return;
+      }
+      var porPadre = {};
+      filas.forEach(function (f) {
+        if (f.responde_a === null || f.responde_a === undefined) return;
+        (porPadre[f.responde_a] = porPadre[f.responde_a] || []).push(f);
+      });
+      var raiz = filas.filter(function (f) { return f.responde_a === null || f.responde_a === undefined; });
+      if (!raiz.length) {
+        mensajeVacio(listaComentarios, "Todavía no hay comentarios. Sé la primera persona en escribir.");
+        return;
+      }
+      // El mas nuevo arriba, pero sus respuestas en el orden en que se escribieron.
+      raiz.reverse();
+      listaComentarios.replaceChildren.apply(
+        listaComentarios,
+        raiz.map(function (c) { return dibujaComentario(c, porPadre[c.id] || []); })
+      );
+    }).catch(function () {
+      mensajeVacio(listaComentarios, "No se pudo conectar con la base de datos. Vuelve a intentar en un momento.");
+    });
+  }
+
+  var formComentario = document.getElementById("form-comentario");
+  var avisoComentario = document.getElementById("c-aviso");
+  formComentario.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var n = document.getElementById("c-nombre").value.trim();
+    var t = document.getElementById("c-texto").value.trim();
+    if (!n || !t) return;
+    var boton = formComentario.querySelector("button");
+    boton.disabled = true;
+    aviso(avisoComentario, "Publicando…", false);
+    agregar("comentarios", { nombre: n, comentario: t, responde_a: null })
+      .then(function () {
+        document.getElementById("c-texto").value = "";
+        aviso(avisoComentario, "Listo, se publicó.", false);
+        return cargarComentarios();
+      })
+      .catch(function () { aviso(avisoComentario, "No se pudo publicar. Vuelve a intentar.", true); })
+      .then(function () { boton.disabled = false; });
+  });
+
+  // ---------- Propuestas ----------
+  var listaPropuestas = document.getElementById("lista-propuestas");
+
+  function cargarPropuestas() {
+    return leer("propuestas", "creado_en.desc").then(function (filas) {
+      if (!filas.length) {
+        mensajeVacio(listaPropuestas, "Todavía no hay propuestas. Manda la primera.");
+        return;
+      }
+      listaPropuestas.replaceChildren.apply(listaPropuestas, filas.map(function (p) {
+        var art = document.createElement("article");
+        art.className = "fila";
+
+        var quien = document.createElement("p");
+        quien.className = "quien";
+        quien.textContent = p.nombre;
+
+        var dice = document.createElement("p");
+        dice.className = "dice";
+        dice.textContent = p.propuesta;
+
+        var cuando = document.createElement("time");
+        cuando.className = "cuando";
+        cuando.textContent = fecha(p.creado_en);
+        if (p.creado_en) cuando.dateTime = p.creado_en;
+
+        art.append(quien, dice, cuando);
+        return art;
+      }));
+    }).catch(function () {
+      mensajeVacio(listaPropuestas, "No se pudo conectar con la base de datos. Vuelve a intentar en un momento.");
+    });
+  }
+
+  var formPropuesta = document.getElementById("form-propuesta");
+  var avisoPropuesta = document.getElementById("p-aviso");
+  formPropuesta.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var n = document.getElementById("p-nombre").value.trim();
+    var t = document.getElementById("p-texto").value.trim();
+    if (!n || !t) return;
+    var boton = formPropuesta.querySelector("button");
+    boton.disabled = true;
+    aviso(avisoPropuesta, "Enviando…", false);
+    agregar("propuestas", { nombre: n, propuesta: t })
+      .then(function () {
+        document.getElementById("p-texto").value = "";
+        aviso(avisoPropuesta, "Listo, se envió.", false);
+        return cargarPropuestas();
+      })
+      .catch(function () { aviso(avisoPropuesta, "No se pudo enviar. Vuelve a intentar.", true); })
+      .then(function () { boton.disabled = false; });
+  });
+
+  cargarComentarios();
+  cargarPropuestas();
+</script>
 </body>
 </html>
