@@ -17,7 +17,24 @@ Los datos de esta página viven en una tabla de Supabase llamada `registros`.
 Ninguna cifra ni ningún texto que se muestre se escribe a mano en el HTML: todo
 sale de esa tabla o de lo que la persona escriba en el formulario.
 
-*(En la sesión le agregas las columnas que acabes usando.)*
+La tabla `registros` tiene estas columnas:
+
+| Columna | Qué guarda | Quién la llena |
+|---|---|---|
+| `nombre` | Texto. El nombre de quien escribe. | La persona, en el formulario. Obligatorio. |
+| `mensaje` | Texto. Lo que quiere decir. | La persona, en el formulario. Obligatorio. |
+| `creado_en` | La fecha y hora en que se guardó. | Se pone sola. Sirve para ordenar del más nuevo al más viejo. |
+| `id` | Un número que distingue cada renglón. | Se pone solo. La página no lo muestra. |
+
+**Quién puede hacer qué con la tabla:** cualquiera puede **leer** y **agregar**.
+Nadie puede **borrar** ni **modificar**. No hace falta una regla que lo prohíba:
+en Supabase lo que no se autoriza queda prohibido solo. Por eso la página no
+tiene botón de borrar, y no se lo agregues: sería un botón que siempre falla.
+
+**Cómo se conecta la página.** En `index.html` están escritos, a la vista, los
+dos datos que hacen falta: la liga `https://vxsstmgblaxfrxwqlzjk.supabase.co` y
+la llave que empieza con `sb_publishable_`. Que estén a la vista es correcto —
+ver la sección 4.
 
 ## 3. Cómo quiero que trabajes aquí
 
